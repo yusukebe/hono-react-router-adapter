@@ -24,15 +24,15 @@
     "react-router": "^7.0.1"
   },
   "devDependencies": {
-    "@hono/vite-dev-server": "^0.16.0",
+    "@hono/vite-dev-server": "^0.17.0",
     "@playwright/test": "^1.48.2",
     "@react-router/dev": "^7.0.1",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "playwright": "^1.47.0",
     "typescript": "^5.1.6",
-    "vite": "^5.1.0",
-    "vite-tsconfig-paths": "^4.2.1",
+    "vite": "^6.0.7",
+    "vite-tsconfig-paths": "^5.1.4",
     "wrangler": "^3.86.0"
   },
   "engines": {
