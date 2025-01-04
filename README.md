@@ -162,13 +162,13 @@ If you want to add extra context values when you use React Router routes, like i
 
 ```ts
 // app/routes/_index.tsx
-import type { Route } from './+types/_index'
+import type { Route } from './+types/home'
 
 export const loader = (args: Route.LoaderArgs) => {
-  return { extra: context.extra }
+  return { extra: args.context.extra }
 }
 
-export default function Index({ loaderData }: Route.ComponentProps) {
+export default function Home({ loaderData }: Route.ComponentProps) {
   const { extra } = loaderData
   return <h1>Extra is {extra}</h1>
 }
@@ -277,15 +277,15 @@ export default app
 In the React Router route, you can get the context from `args.context.hono.context`:
 
 ```ts
-// app/routes/_index.tsx
-import { Router } from './types/_index'
+// app/routes/home.tsx
+import type { Route } from './+types/home'
 
-export const loader = ({ context }) => {
+export const loader = (args: Route.LoaderArgs) => {
   const message = args.context.hono.context.get('message')
   return { message }
 }
 
-export default function Index({ loaderData }: Route.ComponentProps) {
+export default function Home({ loaderData }: Route.ComponentProps) {
   const { message } = loaderData
   return <h1>Message is {message}</h1>
 }
@@ -366,7 +366,7 @@ export default app
 You can retrieve and process the context saved in Hono from React Router as follows:
 
 ```ts
-// app/routes/_index.tsx
+// app/routes/home.tsx
 import type { Env } from 'server'
 import { getContext } from 'hono/context-storage' // It can be called anywhere for server-side processing.
 
