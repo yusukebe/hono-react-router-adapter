@@ -4,7 +4,7 @@ import type { Plugin } from 'vite'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import type { GetLoadContext } from './remix'
+import type { GetLoadContext } from './react-router'
 
 interface Adapter {
   env?: Record<string, unknown> | Promise<Record<string, unknown>>

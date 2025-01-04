@@ -7,7 +7,7 @@ export default defineConfig({
     'src/handlers/cloudflare-pages.ts',
     'src/handlers/cloudflare-workers.ts',
     'src/handlers/node/index.ts',
-    'src/remix.ts',
+    'src/react-router.ts',
   ],
   external: [
     '../server',

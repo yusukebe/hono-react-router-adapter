@@ -1,8 +1,8 @@
 import { Hono } from 'hono'
 import { handle } from 'hono/cloudflare-pages'
-import { remix, staticAssets } from '../middleware'
-import { defaultGetLoadContext } from '../remix'
-import type { GetLoadContext } from '../remix'
+import { reactRouter, staticAssets } from '../middleware'
+import { defaultGetLoadContext } from '../react-router'
+import type { GetLoadContext } from '../react-router'
 
 type Options = {
   getLoadContext: GetLoadContext
@@ -22,7 +22,7 @@ export const handler = (serverBuild: any, userApp?: Hono<any, any, any>, options
       return staticAssets()(c, next)
     },
     async (c, next) => {
-      return remix({
+      return reactRouter({
         build: serverBuild,
         mode: 'production',
         getLoadContext: options?.getLoadContext ?? defaultGetLoadContext,

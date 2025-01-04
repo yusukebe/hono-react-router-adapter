@@ -1,5 +1,5 @@
 {
-  "name": "hono-remix-adapter",
+  "name": "hono-react-router-adapter",
   "version": "0.5.4",
   "type": "module",
   "scripts": {
@@ -50,7 +50,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yusukebe/hono-remix-adapter.git"
+    "url": "git+https://github.com/yusukebe/hono-react-router-adapter.git"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org",

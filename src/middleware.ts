@@ -1,16 +1,16 @@
 import { createMiddleware } from 'hono/factory'
 import type { ServerBuild } from 'react-router'
 import { createRequestHandler } from 'react-router'
-import { createGetLoadContextArgs } from './remix'
-import type { GetLoadContext } from './remix'
+import { createGetLoadContextArgs } from './react-router'
+import type { GetLoadContext } from './react-router'
 
-interface RemixMiddlewareOptions {
+interface ReactRouterMiddlewareOptions {
   build: ServerBuild
   mode?: 'development' | 'production'
   getLoadContext: GetLoadContext
 }
 
-export const remix = ({ mode, build, getLoadContext }: RemixMiddlewareOptions) => {
+export const reactRouter = ({ mode, build, getLoadContext }: ReactRouterMiddlewareOptions) => {
   return createMiddleware(async (c) => {
     const requestHandler = createRequestHandler(build, mode)
     const args = createGetLoadContextArgs(c)

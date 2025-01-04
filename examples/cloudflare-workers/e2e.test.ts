@@ -5,10 +5,10 @@ test('Should return 200 response - /', async ({ page }) => {
   expect(response?.status()).toBe(200)
 
   const headers = response?.headers() ?? {}
-  expect(headers['x-powered-by']).toBe('Remix and Hono')
+  expect(headers['x-powered-by']).toBe('React Router and Hono')
 
   const contentH1 = await page.textContent('h1')
-  expect(contentH1).toBe('Remix and Hono')
+  expect(contentH1).toBe('React Router and Hono')
 
   const contentH2 = await page.textContent('h2')
   expect(contentH2).toBe('Var is My Value')

@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
 import type { AppLoadContext } from 'react-router'
-import { remix } from './middleware'
-import type { GetLoadContext } from './remix'
+import { reactRouter } from './middleware'
+import type { GetLoadContext } from './react-router'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const defaultGetLoadContext = ({ context }: any): AppLoadContext => {
@@ -24,7 +24,7 @@ export const handler = (serverBuild: any, userApp?: Hono<any, any, any>, options
   }
 
   app.use(async (c, next) => {
-    return remix({
+    return reactRouter({
       build: serverBuild,
       mode: 'production',
       getLoadContext: options?.getLoadContext ?? defaultGetLoadContext,
