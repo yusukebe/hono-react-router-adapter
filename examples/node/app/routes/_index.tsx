@@ -1,5 +1,5 @@
-import type { LoaderFunctionArgs } from '@remix-run/node'
-import { useLoaderData } from '@remix-run/react'
+import type { LoaderFunctionArgs } from 'react-router'
+import type { Route } from './+types/_index'
 
 export const loader = (args: LoaderFunctionArgs) => {
   const extra = args.context.extra
@@ -7,8 +7,8 @@ export const loader = (args: LoaderFunctionArgs) => {
   return { extra, url }
 }
 
-export default function Index() {
-  const { extra, url } = useLoaderData<typeof loader>()
+export default function Index({ loaderData }: Route.ComponentProps) {
+  const { extra, url } = loaderData
   return (
     <div>
       <h1>Remix and Hono</h1>

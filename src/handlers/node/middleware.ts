@@ -1,6 +1,6 @@
-import { createRequestHandler } from '@remix-run/node'
-import type { ServerBuild } from '@remix-run/node'
 import { createMiddleware } from 'hono/factory'
+import { createRequestHandler } from 'react-router'
+import type { ServerBuild } from 'react-router'
 import { createGetLoadContextArgs } from './remix'
 import type { GetLoadContext } from './remix'
 

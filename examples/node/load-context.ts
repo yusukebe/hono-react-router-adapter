@@ -2,7 +2,7 @@ type GetLoadContextArgs = {
   request: Request
 }
 
-declare module '@remix-run/node' {
+declare module 'react-router' {
   interface AppLoadContext extends ReturnType<typeof getLoadContext> {
     url: string
     extra: string

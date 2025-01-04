@@ -1,6 +1,6 @@
 # hono-remix-adapter
 
-`hono-remix-adapter` is a set of tools for adapting between Hono and Remix. It is composed of a Vite plugin and handlers that enable it to support platforms like Cloudflare Workers and Node.js. You just create Hono app, and it will be applied to your Remix app.
+`hono-remix-adapter` is a set of tools for adapting between Hono and React Router. It is composed of a Vite plugin and handlers that enable it to support platforms like Cloudflare Workers and Node.js. You just create Hono app, and it will be applied to your React Router app.
 
 ```ts
 // server/index.ts
@@ -179,12 +179,12 @@ First, create the `getLoadContext` function and export it:
 
 ```ts
 // load-context.ts
-import type { AppLoadContext } from '@remix-run/cloudflare'
+import type { AppLoadContext } from 'react-router'
 import type { PlatformProxy } from 'wrangler'
 
 type Cloudflare = Omit<PlatformProxy, 'dispose'>
 
-declare module '@remix-run/cloudflare' {
+declare module 'react-router' {
   interface AppLoadContext {
     cloudflare: Cloudflare
     extra: string
@@ -209,7 +209,7 @@ Then import the `getLoadContext` and add it to the `serverAdapter` as an argumen
 ```ts
 // vite.config.ts
 import adapter from '@hono/vite-dev-server/cloudflare'
-import { vitePlugin as remix } from '@remix-run/dev'
+import { reactRouter } from '@react-router/dev'
 import serverAdapter from 'hono-remix-adapter/vite'
 import { defineConfig } from 'vite'
 import { getLoadContext } from './load-context'
@@ -217,7 +217,7 @@ import { getLoadContext } from './load-context'
 export default defineConfig({
   plugins: [
     // ...
-    remix(),
+    reactRouter(),
     serverAdapter({
       adapter,
       getLoadContext,
@@ -275,20 +275,19 @@ app.use(async (c, next) => {
 export default app
 ```
 
-In the Remix route, you can get the context from `args.context.hono.context`:
+In the React Router route, you can get the context from `args.context.hono.context`:
 
 ```ts
 // app/routes/_index.tsx
-import type { LoaderFunctionArgs } from '@remix-run/cloudflare'
-import { useLoaderData } from '@remix-run/react'
+import { Router } from "./types/_index"
 
 export const loader = ({ context }) => {
   const message = args.context.hono.context.get('message')
   return { message }
 }
 
-export default function Index() {
-  const { message } = useLoaderData<typeof loader>()
+export default function Index({ loaderData }:Route.ComponentProps) {
+  const { message } = loaderData
   return <h1>Message is {message}</h1>
 }
 ```
@@ -297,7 +296,7 @@ To enable type inference, config the `load-context.ts` like follows:
 
 ```ts
 // load-context.ts
-import type { AppLoadContext } from '@remix-run/cloudflare'
+import type { AppLoadContext } from 'react-router'
 import type { Context } from 'hono'
 import type { PlatformProxy } from 'wrangler'
 
@@ -309,7 +308,7 @@ type Env = {
 
 type Cloudflare = Omit<PlatformProxy, 'dispose'>
 
-declare module '@remix-run/cloudflare' {
+declare module 'react-router' {
   interface AppLoadContext {
     cloudflare: Cloudflare
     hono: {

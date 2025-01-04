@@ -6,5 +6,6 @@ test-results
 /build
 .env
 .dev.vars
+.react-router
 
 .wrangler

@@ -60,7 +60,6 @@
     "@cloudflare/vitest-pool-workers": "^0.4.23",
     "@cloudflare/workers-types": "^4.20240815.0",
     "@hono/eslint-config": "^1.0.1",
-    "@remix-run/cloudflare": "^2.14.0",
     "eslint": "^9.10.0",
     "hono": "^4.5.11",
     "np": "^10.0.7",
@@ -73,15 +72,14 @@
   },
   "dependencies": {
     "@hono/vite-dev-server": "^0.17.0",
-    "@remix-run/server-runtime": "^2.15.0"
+    "react-router": "^7.0.1"
   },
   "peerDependencies": {
     "hono": "*"
   },
   "optionalDependencies": {
     "@hono/node-server": "*",
-    "@remix-run/cloudflare": "*",
-    "@remix-run/node": "*"
+    "@react-router/node": "*"
   },
   "engines": {
     "node": ">=18.0.0"

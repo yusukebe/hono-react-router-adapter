@@ -14,7 +14,6 @@
       "ES2022"
     ],
     "types": [
-      "@remix-run/cloudflare",
       "vite/client",
       "@cloudflare/workers-types/2023-07-01"
     ],
@@ -30,6 +29,7 @@
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "baseUrl": ".",
+    "rootDirs": [".", "./.react-router/types"],
     "paths": {
       "~/*": [
         "./app/*"

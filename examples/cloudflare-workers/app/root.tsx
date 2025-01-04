@@ -1,4 +1,4 @@
-import { Outlet, Scripts } from '@remix-run/react'
+import { Outlet, Scripts } from 'react-router'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (

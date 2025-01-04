@@ -1,5 +1,5 @@
-import type { AppLoadContext } from '@remix-run/node'
 import { Hono } from 'hono'
+import type { AppLoadContext } from 'react-router'
 import { remix } from './middleware'
 import type { GetLoadContext } from './remix'
 

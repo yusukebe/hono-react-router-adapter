@@ -4,27 +4,29 @@
   "sideEffects": false,
   "type": "module",
   "scripts": {
-    "build": "remix vite:build",
+    "build": "react-router build",
     "deploy": "npm run build && wrangler deploy",
-    "dev": "remix vite:dev",
+    "dev": "react-router dev",
     "start": "wrangler dev",
-    "typecheck": "tsc",
+    "typecheck": "react-router typegen && tsc",
     "preview": "npm run build && wrangler dev",
     "test:e2e:vite": "playwright test -c playwright-vite.config.ts e2e.test.ts",
-    "test:e2e:workers": "npm run build && playwright test -c playwright-workers.config.ts e2e.test.ts"
+    "test:e2e:workers": "npm run build && playwright test -c playwright-workers.config.ts e2e.test.ts",
+    "typegen": "react-router typegen"
   },
   "dependencies": {
-    "@remix-run/cloudflare": "^2.14.0",
-    "@remix-run/react": "^1.19.3",
+    "@react-router/cloudflare": "^7.0.1",
+    "@react-router/fs-routes": "^7.0.1",
     "hono": "^4.6.9",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router": "^7.0.1"
   },
   "devDependencies": {
     "@hono/vite-dev-server": "^0.16.0",
     "@playwright/test": "^1.48.2",
-    "@remix-run/dev": "^2.14.0",
+    "@react-router/dev": "^7.0.1",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "playwright": "^1.47.0",

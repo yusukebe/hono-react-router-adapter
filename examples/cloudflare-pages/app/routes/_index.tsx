@@ -1,8 +1,7 @@
-import type { LoaderFunctionArgs } from '@remix-run/cloudflare'
-import { useLoaderData } from '@remix-run/react'
+import type { Route } from './+types/_index'
 import logoDark from '/logo-dark.png?inline'
 
-export const loader = (args: LoaderFunctionArgs) => {
+export const loader = (args: Route.LoaderArgs) => {
   const extra = args.context.extra
   const cloudflare = args.context.cloudflare
   const myVarInVariables = args.context.hono.context.get('MY_VAR_IN_VARIABLES')
@@ -10,8 +9,8 @@ export const loader = (args: LoaderFunctionArgs) => {
   return { cloudflare, extra, myVarInVariables, isWaitUntilDefined }
 }
 
-export default function Index() {
-  const { cloudflare, extra, myVarInVariables, isWaitUntilDefined } = useLoaderData<typeof loader>()
+export default function Index({ loaderData }: Route.ComponentProps) {
+  const { cloudflare, extra, myVarInVariables, isWaitUntilDefined } = loaderData
   return (
     <div>
       <h1>Remix and Hono</h1>

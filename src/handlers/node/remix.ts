@@ -1,5 +1,5 @@
-import type { AppLoadContext } from '@remix-run/node'
 import type { Context } from 'hono'
+import type { AppLoadContext } from 'react-router'
 
 export type GetLoadContext = (args: {
   request: Request
