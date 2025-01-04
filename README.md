@@ -31,7 +31,7 @@ This means you can create API routes with Hono's syntax and use a lot of Hono's 
 ## Install
 
 ```bash
-npm i hono-remix-adapter
+npm i hono-remix-adapter hono
 ```
 
 ## How to use
@@ -331,6 +331,49 @@ export const getLoadContext: GetLoadContext = ({ context }) => {
     ...context,
     extra: 'stuff',
   }
+}
+```
+
+## AsyncLocalStorage
+
+You can use AsyncLocalStorage, which is supported by Node.js, Cloudflare Workers, etc.
+You can easily store context using Hono's Context Storage Middleware.
+
+```ts
+// server/index.ts
+import { Hono } from 'hono'
+import { contextStorage } from 'hono/context-storage'
+
+export interface Env {
+  Variables: {
+    message: string
+    // db: DatabaseConnection // It's also a good idea to store database connections, etc.
+  }
+}
+
+const app = new Hono<Env>()
+
+app.use(contextStorage())
+
+app.use(async (c, next) => {
+  c.set('message', 'Hello!')
+
+  await next()
+})
+
+export default app
+```
+
+You can retrieve and process the context saved in Hono from Remix as follows:
+
+```ts
+// app/routes/_index.tsx
+import type { Env } from 'server'
+import { getContext } from 'hono/context-storage' // It can be called anywhere for server-side processing.
+
+export const loader = () => {
+  const message = getContext<Env>().var.message
+  ...
 }
 ```
 

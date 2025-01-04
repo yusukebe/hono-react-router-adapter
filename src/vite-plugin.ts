@@ -26,7 +26,14 @@ export default (options: Options): Plugin => {
   return devServer({
     adapter: options?.adapter,
     entry: options.entry,
-    exclude: options?.exclude ?? [...defaultOptions.exclude, '/assets/**', '/app/**'],
+    exclude: options?.exclude ?? [
+      ...defaultOptions.exclude,
+      '/assets/**',
+      '/app/**',
+      '/src/app/**',
+      // matches for vite's import assets suffixes
+      /\?(import(&)?)?(inline|url|no-inline|raw)?$/,
+    ],
     injectClientScript: false,
     loadModule: async (server, entry) => {
       const appModule = await server.ssrLoadModule(entry)

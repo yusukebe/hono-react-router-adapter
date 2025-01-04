@@ -1,14 +1,16 @@
 import type { Route } from './+types/_index'
+import logoDark from '/logo-dark.png?inline'
 
 export const loader = (args: Route.LoaderArgs) => {
   const extra = args.context.extra
   const cloudflare = args.context.cloudflare
   const myVarInVariables = args.context.hono.context.get('MY_VAR_IN_VARIABLES')
-  return { cloudflare, extra, myVarInVariables }
+  const isWaitUntilDefined = !!cloudflare.ctx.waitUntil
+  return { cloudflare, extra, myVarInVariables, isWaitUntilDefined }
 }
 
 export default function Index({ loaderData }: Route.ComponentProps) {
-  const { cloudflare, extra, myVarInVariables } = loaderData
+  const { cloudflare, extra, myVarInVariables, isWaitUntilDefined } = loaderData
   return (
     <div>
       <h1>Remix and Hono</h1>
@@ -20,6 +22,8 @@ export default function Index({ loaderData }: Route.ComponentProps) {
       </h3>
       <h4>Extra is {extra}</h4>
       <h5>Var in Variables is {myVarInVariables}</h5>
+      <h6>waitUntil is {isWaitUntilDefined ? 'defined' : 'not defined'}</h6>
+      <img src={logoDark} alt='Remix' />
     </div>
   )
 }

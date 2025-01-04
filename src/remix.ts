@@ -28,9 +28,7 @@ export const createGetLoadContextArgs = (c: Context): GetLoadContextArgs => {
       cloudflare: {
         env: c.env,
         cf: c.req.raw.cf,
-        ctx: {
-          ...c.executionCtx,
-        },
+        ctx: c.executionCtx,
         // @ts-expect-error globalThis.caches is not typed
         caches: globalThis.caches ? caches : undefined,
       },
