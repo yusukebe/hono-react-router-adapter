@@ -1,7 +1,7 @@
 import { Hono } from 'hono'
-import { remix } from '../middleware'
-import { defaultGetLoadContext } from '../remix'
-import type { GetLoadContext } from '../remix'
+import { reactRouter } from '../middleware'
+import { defaultGetLoadContext } from '../react-router'
+import type { GetLoadContext } from '../react-router'
 
 type Options = {
   getLoadContext: GetLoadContext
@@ -17,7 +17,7 @@ export const handler = (serverBuild: any, userApp?: Hono<any, any, any>, options
   }
 
   app.use(async (c, next) => {
-    return remix({
+    return reactRouter({
       build: serverBuild,
       mode: 'production',
       getLoadContext: options?.getLoadContext ?? defaultGetLoadContext,

@@ -1,6 +1,6 @@
 import { Hono } from 'hono'
-import { createGetLoadContextArgs, defaultGetLoadContext } from './remix'
-import type { GetLoadContext } from './remix'
+import { createGetLoadContextArgs, defaultGetLoadContext } from './react-router'
+import type { GetLoadContext } from './react-router'
 
 type Options = {
   getLoadContext: GetLoadContext
@@ -22,8 +22,11 @@ export const handle = (userApp?: Hono, options?: Options) => {
     const getLoadContext = options?.getLoadContext ?? defaultGetLoadContext
     const args = createGetLoadContextArgs(c)
 
-    const remixContext = getLoadContext(args)
-    return handler(c.req.raw, remixContext instanceof Promise ? await remixContext : remixContext)
+    const reactRouterContext = getLoadContext(args)
+    return handler(
+      c.req.raw,
+      reactRouterContext instanceof Promise ? await reactRouterContext : reactRouterContext
+    )
   })
 
   return app

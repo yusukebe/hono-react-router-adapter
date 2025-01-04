@@ -1,5 +1,5 @@
 import type { Route } from './+types/_index'
-import logoDark from '/logo-dark.png?inline'
+import logoDark from '/logo.png?inline'
 
 export const loader = (args: Route.LoaderArgs) => {
   const extra = args.context.extra
@@ -13,7 +13,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
   const { cloudflare, extra, myVarInVariables, isWaitUntilDefined } = loaderData
   return (
     <div>
-      <h1>Remix and Hono</h1>
+      <h1>React Router and Hono</h1>
       <h2>Var is {cloudflare.env.MY_VAR}</h2>
       <h3>
         {cloudflare.cf ? 'cf,' : ''}
@@ -23,7 +23,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
       <h4>Extra is {extra}</h4>
       <h5>Var in Variables is {myVarInVariables}</h5>
       <h6>waitUntil is {isWaitUntilDefined ? 'defined' : 'not defined'}</h6>
-      <img src={logoDark} alt='Remix' />
+      <img src={logoDark} alt='React Router' />
     </div>
   )
 }

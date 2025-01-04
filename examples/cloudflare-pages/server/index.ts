@@ -13,7 +13,7 @@ const app = new Hono<{
 app.use(async (c, next) => {
   c.set('MY_VAR_IN_VARIABLES', 'My variable set in c.set')
   await next()
-  c.header('X-Powered-By', 'Remix and Hono')
+  c.header('X-Powered-By', 'React Router and Hono')
 })
 
 app.get('/api', (c) => {

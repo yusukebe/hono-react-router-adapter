@@ -11,7 +11,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
   const { extra, url } = loaderData
   return (
     <div>
-      <h1>Remix and Hono</h1>
+      <h1>React Router and Hono</h1>
       <h2>URL is {url}</h2>
       <h3>Extra is {extra}</h3>
     </div>

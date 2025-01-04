@@ -12,7 +12,7 @@ export default function Index({ loaderData }: Route.ComponentProps) {
   const { cloudflare, extra, myVarInVariables, isWaitUntilDefined } = loaderData
   return (
     <div>
-      <h1>Remix and Hono</h1>
+      <h1>React Router and Hono</h1>
       <h2>Var is {cloudflare.env.MY_VAR}</h2>
       <h3>
         {cloudflare.cf ? 'cf,' : ''}

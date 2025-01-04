@@ -1,6 +1,6 @@
-# hono-remix-adapter
+# hono-react-router-adapter
 
-`hono-remix-adapter` is a set of tools for adapting between Hono and React Router. It is composed of a Vite plugin and handlers that enable it to support platforms like Cloudflare Workers and Node.js. You just create Hono app, and it will be applied to your React Router app.
+`hono-react-router-adapter` is a set of tools for adapting between Hono and React Router. It is composed of a Vite plugin and handlers that enable it to support platforms like Cloudflare Workers and Node.js. You just create Hono app, and it will be applied to your React Router app.
 
 ```ts
 // server/index.ts
@@ -10,7 +10,7 @@ const app = new Hono()
 
 app.use(async (c, next) => {
   await next()
-  c.header('X-Powered-By', 'Remix and Hono')
+  c.header('X-Powered-By', 'React Router and Hono')
 })
 
 app.get('/api', (c) => {
@@ -26,12 +26,12 @@ This means you can create API routes with Hono's syntax and use a lot of Hono's 
 
 > [!WARNING]
 >
-> `hono-remix-adapter` is currently unstable. The API may be changed without announcement in the future.
+> `hono-react-router-adapter` is currently unstable. The API may be changed without announcement in the future.
 
 ## Install
 
 ```bash
-npm i hono-remix-adapter hono
+npm i hono-react-router-adapter hono
 ```
 
 ## How to use
@@ -40,12 +40,12 @@ Edit your `vite.config.ts`:
 
 ```ts
 // vite.config.ts
-import serverAdapter from 'hono-remix-adapter/vite'
+import serverAdapter from 'hono-react-router-adapter/vite'
 
 export default defineConfig({
   plugins: [
     // ...
-    remix(),
+    reactRouter(),
     serverAdapter({
       entry: 'server/index.ts',
     }),
@@ -73,12 +73,12 @@ To support Cloudflare Workers and Cloudflare Pages, add the adapter in `@hono/vi
 ```ts
 // vite.config.ts
 import adapter from '@hono/vite-dev-server/cloudflare'
-import serverAdapter from 'hono-remix-adapter/vite'
+import serverAdapter from 'hono-react-router-adapter/vite'
 
 export default defineConfig({
   plugins: [
     // ...
-    remix(),
+    reactRouter(),
     serverAdapter({
       adapter, // Add Cloudflare adapter
       entry: 'server/index.ts',
@@ -91,7 +91,7 @@ To deploy your app to Cloudflare Workers, you can write the following handler on
 
 ```ts
 // worker.ts
-import handle from 'hono-remix-adapter/cloudflare-workers'
+import handle from 'hono-react-router-adapter/cloudflare-workers'
 import * as build from './build/server'
 import server from './server'
 
@@ -113,7 +113,7 @@ To deploy your app to Cloudflare Pages, you can write the following handler on `
 
 ```ts
 // functions/[[path]].ts
-import handle from 'hono-remix-adapter/cloudflare-pages'
+import handle from 'hono-react-router-adapter/cloudflare-pages'
 import * as build from '../build/server'
 import server from '../server'
 
@@ -122,13 +122,13 @@ export const onRequest = handle(build, server)
 
 ## Node.js
 
-If you want to run your app on Node.js, you can use `hono-remix-adapter/node`. Write `main.ts`:
+If you want to run your app on Node.js, you can use `hono-react-router-adapter/node`. Write `main.ts`:
 
 ```ts
 // main.ts
 import { serve } from '@hono/node-server'
 import { serveStatic } from '@hono/node-server/serve-static'
-import handle from 'hono-remix-adapter/node'
+import handle from 'hono-react-router-adapter/node'
 import * as build from './build/server'
 import { getLoadContext } from './load-context'
 import server from './server'
@@ -158,19 +158,18 @@ esbuild main.ts --bundle --outfile=main.mjs --platform=node --target=node16.8 --
 
 ## `getLoadContext`
 
-If you want to add extra context values when you use Remix routes, like in the following use case:
+If you want to add extra context values when you use React Router routes, like in the following use case:
 
 ```ts
 // app/routes/_index.tsx
-import type { LoaderFunctionArgs } from '@remix-run/cloudflare'
-import { useLoaderData } from '@remix-run/react'
+import type { Route } from './+types/_index'
 
-export const loader = ({ context }) => {
+export const loader = (args: Route.LoaderArgs) => {
   return { extra: context.extra }
 }
 
-export default function Index() {
-  const { extra } = useLoaderData<typeof loader>()
+export default function Index({ loaderData }: Route.ComponentProps) {
+  const { extra } = loaderData
   return <h1>Extra is {extra}</h1>
 }
 ```
@@ -210,7 +209,7 @@ Then import the `getLoadContext` and add it to the `serverAdapter` as an argumen
 // vite.config.ts
 import adapter from '@hono/vite-dev-server/cloudflare'
 import { reactRouter } from '@react-router/dev'
-import serverAdapter from 'hono-remix-adapter/vite'
+import serverAdapter from 'hono-react-router-adapter/vite'
 import { defineConfig } from 'vite'
 import { getLoadContext } from './load-context'
 
@@ -231,7 +230,7 @@ For Cloudflare Workers, you can add it to the `handler` function:
 
 ```ts
 // worker.ts
-import handle from 'hono-remix-adapter/cloudflare-workers'
+import handle from 'hono-react-router-adapter/cloudflare-workers'
 import * as build from './build/server'
 import { getLoadContext } from './load-context'
 import app from './server'
@@ -243,7 +242,7 @@ You can also add it for Cloudflare Pages:
 
 ```ts
 // functions/[[path]].ts
-import handle from 'hono-remix-adapter/cloudflare-pages'
+import handle from 'hono-react-router-adapter/cloudflare-pages'
 import { getLoadContext } from 'load-context'
 import * as build from '../build/server'
 import server from '../server'
@@ -255,7 +254,7 @@ This way is almost the same as [Remix](https://remix.run/docs/en/main/guides/vit
 
 ### Getting Hono context
 
-You can get the Hono context in Remix routes. For example, you can pass the value with `c.set()` from your Hono instance in the `server/index.ts`:
+You can get the Hono context in React Router routes. For example, you can pass the value with `c.set()` from your Hono instance in the `server/index.ts`:
 
 ```ts
 // server/index.ts
@@ -279,14 +278,14 @@ In the React Router route, you can get the context from `args.context.hono.conte
 
 ```ts
 // app/routes/_index.tsx
-import { Router } from "./types/_index"
+import { Router } from './types/_index'
 
 export const loader = ({ context }) => {
   const message = args.context.hono.context.get('message')
   return { message }
 }
 
-export default function Index({ loaderData }:Route.ComponentProps) {
+export default function Index({ loaderData }: Route.ComponentProps) {
   const { message } = loaderData
   return <h1>Message is {message}</h1>
 }
@@ -364,7 +363,7 @@ app.use(async (c, next) => {
 export default app
 ```
 
-You can retrieve and process the context saved in Hono from Remix as follows:
+You can retrieve and process the context saved in Hono from React Router as follows:
 
 ```ts
 // app/routes/_index.tsx
@@ -377,7 +376,7 @@ export const loader = () => {
 }
 ```
 
-## Auth middleware for Remix routes
+## Auth middleware for React Router routes
 
 If you want to add Auth Middleware, e.g. Basic Auth middleware, please be careful that users can access the protected pages with SPA tradition. To prevent this, add a `loader` to the page:
 
