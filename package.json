@@ -71,7 +71,7 @@
     "wrangler": "^3.86.0"
   },
   "dependencies": {
-    "@hono/vite-dev-server": "^0.17.0",
+    "@hono/vite-dev-server": "^0.18.1",
     "react-router": "^7.0.1"
   },
   "peerDependencies": {
