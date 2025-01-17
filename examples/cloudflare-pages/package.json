@@ -24,7 +24,7 @@
     "react-router": "^7.0.1"
   },
   "devDependencies": {
-    "@hono/vite-dev-server": "^0.17.0",
+    "@hono/vite-dev-server": "^0.18.1",
     "@playwright/test": "^1.48.2",
     "@react-router/dev": "^7.0.1",
     "@types/react": "^18.2.20",
