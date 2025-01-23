@@ -34,3 +34,9 @@ test('Should return 200 response - /api', async ({ page }) => {
   expect(response?.status()).toBe(200)
   expect(await response?.json()).toEqual({ message: 'Hello', var: 'My Value' })
 })
+
+test('Should return 200 response - /api?', async ({ page }) => {
+  const response = await page.goto('/api?')
+  expect(response?.status()).toBe(200)
+  expect(await response?.json()).toEqual({ message: 'Hello', var: 'My Value' })
+})
