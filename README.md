@@ -376,6 +376,9 @@ export const loader = () => {
 }
 ```
 
+> [!NOTE]
+> To use AsyncLocalStorage on Cloudflare Workers, enable [the Node.js compatibility flag](https://developers.cloudflare.com/workers/runtime-apis/nodejs).
+
 ## Auth middleware for React Router routes
 
 If you want to add Auth Middleware, e.g. Basic Auth middleware, please be careful that users can access the protected pages with SPA tradition. To prevent this, add a `loader` to the page:
