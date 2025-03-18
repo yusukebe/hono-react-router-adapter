@@ -12,7 +12,7 @@
     "build": "tsup",
     "watch": "tsup --watch",
     "prerelease": "bun run build && bun run test",
-    "release": "bun publish"
+    "release": "bun run np"
   },
   "files": [
     "dist"
