@@ -3,27 +3,25 @@
   "version": "0.6.2",
   "type": "module",
   "scripts": {
-    "test": "npm run test:e2e",
+    "test": "bun run test:e2e",
     "test:e2e": "npm-run-all -s test:e2e:*",
-    "test:e2e:vite": "npm run test:e2e:vite -w example-cloudflare-pages",
-    "test:e2e:cloudflare-pages": "npm run test:e2e:pages -w example-cloudflare-pages",
-    "test:e2e:cloudflare-workers": "npm run test:e2e:workers -w example-cloudflare-workers",
-    "test:e2e:node": "npm run test:e2e:node -w example-node",
+    "test:e2e:vite": "bun run --filter example-cloudflare-pages test:e2e:vite",
+    "test:e2e:cloudflare-pages": "bun run --filter example-cloudflare-pages test:e2e:pages",
+    "test:e2e:cloudflare-workers": "bun run --filter example-cloudflare-workers test:e2e:workers",
+    "test:e2e:node": "bun run --filter example-node test:e2e:node",
     "build": "tsup",
     "watch": "tsup --watch",
     "lint": "eslint src examples/cloudflare-pages/app examples/cloudflare-pages/server examples/cloudflare-workers/app examples/cloudflare-workers/server",
     "lint:fix": "eslint src examples/cloudflare-pages/app examples/cloudflare-pages/server examples/cloudflare-workers/app examples/cloudflare-workers/server --fix",
-    "format": "prettier --check --cache \"src/**/*.{ts,tsx}\" \"examples/cloudflare-pages/**/*.{ts,tsx}\" \"examples/cloudflare-workers/**/*.{ts,tsx}\" \"examples/node/**/*.{ts,tsx}\"",
-    "format:fix": "prettier --write --cache --cache-strategy metadata \"src/**/*.{ts,tsx}\" \"examples/cloudflare-pages/**/*.{ts,tsx}\" \"examples/cloudflare-workers/**/*.{ts,tsx}\" \"examples/node/**/*.{ts,tsx}\"",
-    "publint": "publint",
-    "prerelease": "npm run build && npm run test",
-    "release": "np"
+    "format": "prettier --check \"src/**/*.{ts,tsx}\" \"examples/cloudflare-pages/**/*.{ts,tsx}\" \"examples/cloudflare-workers/**/*.{ts,tsx}\" \"examples/node/**/*.{ts,tsx}\"",
+    "format:fix": "prettier --write \"src/**/*.{ts,tsx}\" \"examples/cloudflare-pages/**/*.{ts,tsx}\" \"examples/cloudflare-workers/**/*.{ts,tsx}\" \"examples/node/**/*.{ts,tsx}\"",
+    "prerelease": "bun run build && bun run test",
+    "release": "bun publish"
   },
   "files": [
     "dist"
   ],
   "workspaces": [
-    "/",
     "./examples/cloudflare-pages",
     "./examples/cloudflare-workers",
     "./examples/node"
@@ -62,7 +60,7 @@
     "@hono/eslint-config": "^1.0.1",
     "eslint": "^9.10.0",
     "hono": "^4.5.11",
-    "np": "^10.0.7",
+    "np": "^10.2.0",
     "npm-run-all": "^4.1.5",
     "publint": "^0.2.10",
     "tsup": "^8.2.4",
