@@ -29,7 +29,6 @@ export default (options: Options): Plugin => {
     exclude: options?.exclude ?? [
       ...defaultOptions.exclude,
       '/assets/**',
-      '/app/**',
       '/src/app/**',
       // matches for vite's import assets suffixes
       /\?(?:inline|url|no-inline|raw|import(?:&(?:inline|url|no-inline|raw)?)?)$/,
