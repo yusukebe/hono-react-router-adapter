@@ -1,85 +1,19 @@
 {
-  "name": "hono-react-router-adapter",
-  "version": "0.6.2",
-  "type": "module",
+  "private": true,
   "scripts": {
-    "test": "bun run test:e2e",
-    "test:e2e": "npm-run-all -s test:e2e:*",
-    "test:e2e:vite": "bun run --filter example-cloudflare-pages test:e2e:vite",
-    "test:e2e:cloudflare-pages": "bun run --filter example-cloudflare-pages test:e2e:pages",
-    "test:e2e:cloudflare-workers": "bun run --filter example-cloudflare-workers test:e2e:workers",
-    "test:e2e:node": "bun run --filter example-node test:e2e:node",
-    "build": "tsup",
-    "watch": "tsup --watch",
-    "lint": "eslint src examples/cloudflare-pages/app examples/cloudflare-pages/server examples/cloudflare-workers/app examples/cloudflare-workers/server",
-    "lint:fix": "eslint src examples/cloudflare-pages/app examples/cloudflare-pages/server examples/cloudflare-workers/app examples/cloudflare-workers/server --fix",
-    "format": "prettier --check \"src/**/*.{ts,tsx}\" \"examples/cloudflare-pages/**/*.{ts,tsx}\" \"examples/cloudflare-workers/**/*.{ts,tsx}\" \"examples/node/**/*.{ts,tsx}\"",
-    "format:fix": "prettier --write \"src/**/*.{ts,tsx}\" \"examples/cloudflare-pages/**/*.{ts,tsx}\" \"examples/cloudflare-workers/**/*.{ts,tsx}\" \"examples/node/**/*.{ts,tsx}\"",
-    "prerelease": "bun run build && bun run test",
-    "release": "bun publish"
+    "lint": "eslint packages/hono-react-router-adapter/src examples/cloudflare-pages/app examples/cloudflare-pages/server examples/cloudflare-workers/app examples/cloudflare-workers/server",
+    "lint:fix": "eslint packages/hono-react-router-adapter/src examples/cloudflare-pages/app examples/cloudflare-pages/server examples/cloudflare-workers/app examples/cloudflare-workers/server --fix",
+    "format": "prettier --check \"packages/hono-react-router-adapter/src/**/*.{ts,tsx}\" \"examples/cloudflare-pages/**/*.{ts,tsx}\" \"examples/cloudflare-workers/**/*.{ts,tsx}\" \"examples/node/**/*.{ts,tsx}\"",
+    "format:fix": "prettier --write \"packages/hono-react-router-adapter/src/**/*.{ts,tsx}\" \"examples/cloudflare-pages/**/*.{ts,tsx}\" \"examples/cloudflare-workers/**/*.{ts,tsx}\" \"examples/node/**/*.{ts,tsx}\""
   },
-  "files": [
-    "dist"
-  ],
   "workspaces": [
-    "./examples/cloudflare-pages",
-    "./examples/cloudflare-workers",
-    "./examples/node"
+    "./packages/*",
+    "./examples/*"
   ],
-  "exports": {
-    "./vite": {
-      "types": "./dist/vite-plugin.d.ts",
-      "import": "./dist/vite-plugin.js"
-    },
-    "./cloudflare-pages": {
-      "types": "./dist/handlers/cloudflare-pages.d.ts",
-      "import": "./dist/handlers/cloudflare-pages.js"
-    },
-    "./cloudflare-workers": {
-      "types": "./dist/handlers/cloudflare-workers.d.ts",
-      "import": "./dist/handlers/cloudflare-workers.js"
-    },
-    "./node": {
-      "types": "./dist/handlers/node/index.d.ts",
-      "import": "./dist/handlers/node/index.js"
-    }
-  },
   "author": "Yusuke Wada <yusuke@kamawada.com> (https://github.com/yusukebe)",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/yusukebe/hono-react-router-adapter.git"
-  },
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org",
-    "access": "public"
-  },
-  "devDependencies": {
-    "@cloudflare/vitest-pool-workers": "^0.4.23",
-    "@cloudflare/workers-types": "^4.20240815.0",
-    "@hono/eslint-config": "^1.0.1",
-    "eslint": "^9.10.0",
-    "hono": "^4.5.11",
-    "np": "^10.2.0",
-    "npm-run-all": "^4.1.5",
-    "publint": "^0.2.10",
-    "tsup": "^8.2.4",
-    "vite": "^6.0.11",
-    "vitest": "1.5.0",
-    "wrangler": "^3.86.0"
-  },
-  "dependencies": {
-    "@hono/vite-dev-server": "^0.18.1",
-    "react-router": "^7.0.1"
-  },
-  "peerDependencies": {
-    "hono": "*"
-  },
-  "optionalDependencies": {
-    "@hono/node-server": "*",
-    "@react-router/node": "*"
-  },
-  "engines": {
-    "node": ">=18.0.0"
   }
 }
