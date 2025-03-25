@@ -1,6 +1,6 @@
 {
   "name": "hono-react-router-adapter",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "type": "module",
   "scripts": {
     "test": "npm run test:e2e",
