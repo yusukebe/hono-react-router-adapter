@@ -19,7 +19,6 @@
     "@react-router/node": "^7.0.1",
     "@react-router/serve": "^7.0.0",
     "hono": "^4.6.11",
-    "hono-react-router-adapter": "workspace:*",
     "isbot": "^4.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

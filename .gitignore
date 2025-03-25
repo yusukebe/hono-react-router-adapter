@@ -4,4 +4,3 @@ node_modules
 *.tgz
 dist
 .DS_Store
-package-lock.json
